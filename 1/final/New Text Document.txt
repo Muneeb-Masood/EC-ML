@@ -1,0 +1,48 @@
+[LightGBM] [Warning] feature_fraction is set=0.9, colsample_bytree=1.0 will be ignored. Current value: feature_fraction=0.9
+[LightGBM] [Warning] min_gain_to_split is set=0, min_split_gain=0.0 will be ignored. Current value: min_gain_to_split=0
+[LightGBM] [Warning] bagging_fraction is set=0.9, subsample=1.0 will be ignored. Current value: bagging_fraction=0.9
+[LightGBM] [Warning] bagging_freq is set=1, subsample_freq=0 will be ignored. Current value: bagging_freq=1
+
+
+ recall: 0.8823
+
+test f1 score = 0.895
+train f1 score = 0.945
+
+ false_neg_rate: 0.1177
+
+ false_pos_rate: 0.0598
+
+ true_neg_rate: 0.9402
+
+ positive_liklihood_ratio: 14.7545
+
+ neg_liklihood_rate: 0.1252
+
+ precision: 0.8992
+
+ false_omission_rate: 0.0703
+
+ false_discovery_rate: 0.1008
+
+ neg_pred_value: 0.9297
+
+ markedness: 0.8288
+
+ diagnostic_odds_ration: 117.8715
+
+ informedness: 0.8225
+
+ prevalence_threshold: 0.2066
+
+ prevalence: 0.3768
+
+ accuracy: 0.9184
+
+ balanced_accuracy: 0.9113
+
+ F1_score: 0.8907
+
+ fowlkes_mallows_index: 0.8907
+
+ jaccard_index: 0.8029
