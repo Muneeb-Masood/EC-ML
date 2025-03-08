@@ -1,4 +1,4 @@
-apply log transform then the scaler on the new df then use the model.
+apply log transform then the scaler on the new dataframe(pandas) then use the model.
 
 ex:
 
@@ -20,4 +20,8 @@ def log_transform_df(X):
     return X
 
 # Load the pipeline
-preprocessor = joblib.load('standalone_preprocessor.pkl')
+preprocessor = joblib.load('preprocessor.pkl')
+
+
+
+the pipeline won't load without the log function re-definition
