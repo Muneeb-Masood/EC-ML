@@ -1,7 +1,7 @@
 import multiprocessing
 from ML_component.fraud_detection_ml import detect_fraud_ml
 from login_anomalies_component.login_anomaly_detection import detect_login_anomalies
-from withdrawl_anomalies_component.withdrawl_anomaly_detection import detect_withdrawal_anomalies
+from withdrawal_anomalies_component.withdrawal_anomaly_detection import detect_withdrawal_anomalies
 
 def process_transaction(data):
     """Handles parallel fraud detection processing for a transaction request."""
