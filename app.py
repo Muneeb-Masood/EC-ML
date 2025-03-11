@@ -32,7 +32,7 @@ def detect_fraud():
             return jsonify({"error": "Missing 'withdrawal_data' for withdrawal transaction"}), 400
 
         # Log received request
-        logging.info(f"Received fraud detection request: {data}")
+        logging.info(f"Received fraud detection request")
 
         # Process transaction using the central controller
         response = process_transaction(data)

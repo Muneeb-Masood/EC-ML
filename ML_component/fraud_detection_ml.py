@@ -21,6 +21,7 @@ SCALER_PATH = os.path.join(os.path.dirname(__file__), "modified_scaler.pkl")
 
 with open(MODEL_PATH, "rb") as model_file:
     model = joblib.load(model_file)
+    model.set_params(device="cpu", n_jobs=-1)  #use all cpu threads
 
 with open(SCALER_PATH, "rb") as scaler_file:
     scaler = joblib.load(scaler_file)
@@ -55,8 +56,23 @@ def detect_fraud_ml(request_data, results):
         # Scale data
         npArray_processed = scaler.transform(df)
 
+                # Define column names
+        feature_names = [
+            "Avg min between sent tnx", "Avg min between received tnx",
+            "Time Diff between first and last (Mins)", "Unique Received From Addresses",
+            "min value received", "max value received", "avg val received",
+            "min val sent", "avg val sent",
+            "total transactions (including tnx to create contract)",
+            "total ether received", "total ether balance"
+        ]
+
+        # Convert NumPy array to DataFrame
+        df_processed = pd.DataFrame(npArray_processed, columns=feature_names)
+
+
         # Predict fraud probability
-        fraud_probability = model.predict_proba(npArray_processed)[:, 1][0]
+        # fraud_probability = model.predict_proba(df_processed)[:, 1][0]
+        fraud_probability = 1 #test
 
         # Store result
         results["ML_fraud_score"] = round(fraud_probability, 4)  # Keep 4 decimal places
