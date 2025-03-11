@@ -15,8 +15,8 @@ def log_transform_df(X):
 
 
 # Load the model and preprocessor
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "lightGBM_fraud_model_final.pkl")
-SCALER_PATH = os.path.join(os.path.dirname(__file__), "scaler.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "lightGBM_fraud_model_final_modified.pkl")
+SCALER_PATH = os.path.join(os.path.dirname(__file__), "modified_scaler.pkl")
 
 
 with open(MODEL_PATH, "rb") as model_file:
