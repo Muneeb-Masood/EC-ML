@@ -1,0 +1,5 @@
+{
+    "max_logins_for_excessive_score": 30,
+    "max_unique_accounts_for_excessive_score": 10,
+    "max_travel_speed_for_full_score": 600
+}

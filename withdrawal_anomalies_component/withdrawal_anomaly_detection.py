@@ -1,56 +1,76 @@
+import logging
+import json
+import os
+
+# Get the directory of the current script (ensures it works even if called from a different location)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
+
+# Load JSON configuration
+with open(CONFIG_PATH, "r") as f:
+    config = json.load(f)
+
+# Read constants from JSON
+LARGE_WITHDRAWAL_THRESHOLD = config.get("LARGE_WITHDRAWAL_THRESHOLD", 0.5)
+MAX_DAILY_WITHDRAWALS = config.get("MAX_DAILY_WITHDRAWALS", 15)
+MAX_LAUNDERING_THRESHOLD = config.get("MAX_LAUNDERING_THRESHOLD", 6.0)
+MAX_FAILED_WITHDRAWALS = config.get("MAX_FAILED_WITHDRAWALS", 10)
+
 
 def detect_withdrawal_anomalies(data, results):
-    """
-    Detects anomalies in withdrawal transactions based on predefined rules:
-    1. Large withdrawal amount compared to the current wallet balance.
-    2. Excessive withdrawals in the last 24 hours.
-    3. High withdrawal frequency over the last 14 days (possible money laundering).
-    4. Unusual number of failed withdrawal attempts in the last 24 hours.
+    """Detects withdrawal anomalies using predefined rules."""
+    try:
+        withdrawal_data = data.get("withdrawal_data", {})
 
-    Extracts required data from "withdrawal_data" in request JSON.
-    Updates 'results' dict with calculated anomaly scores.
-    """
+        if not withdrawal_data:
+            results["withdrawal_anomalies"] = {}
+            return
 
-    # Extract withdrawal-related data
-    withdrawal_data = data.get("withdrawal_data", {})
+        # Extract fields safely
+        try:
+            current_wallet_balance = float(withdrawal_data.get("current_wallet_balance", 0))  
+            withdrawal_amount = float(withdrawal_data.get("withdrawal_amount", 0))  
+            conversion_rate = float(withdrawal_data.get("conversion_rate", 1))  
+            avg_withdrawal_frequency_14d = float(withdrawal_data.get("avg_withdrawal_frequency_14d", 0))
+            withdrawals_24h = int(withdrawal_data.get("withdrawals_24h", 0))
+            failed_withdrawals_24h = int(withdrawal_data.get("failed_withdrawals_24h", 0))
+        except ValueError:
+            logging.error("Invalid data types in withdrawal_data")
+            results["withdrawal_anomalies"] = {"error": "Invalid data types in withdrawal_data"}
+            return
 
-    if not withdrawal_data:
-        results["withdrawal_anomalies"] = {}  # Return empty response if no withdrawal data
-        return
+        # Ensure values are non-negative
+        if any(value < 0 for value in [current_wallet_balance, withdrawal_amount, avg_withdrawal_frequency_14d, failed_withdrawals_24h]):
+            logging.warning("Negative values found in withdrawal_data")
+            results["withdrawal_anomalies"] = {"error": "Negative values detected in withdrawal_data"}
+            return
 
-    # Extract individual fields
-    current_wallet_balance = float(withdrawal_data["current_wallet_balance"])  # Balance in Ether
-    withdrawal_amount = float(withdrawal_data["withdrawal_amount"])  # Withdrawal amount in USD
-    conversion_rate = float(withdrawal_data["conversion_rate"])  # USD per 1 Ether
-    avg_withdrawal_frequency_14d = float(withdrawal_data["avg_withdrawal_frequency_14d"])
-    withdrawals_24h = int(withdrawal_data["withdrawals_24h"])
-    failed_withdrawals_24h = int(withdrawal_data["failed_withdrawals_24h"])
+        # Convert balance to USD
+        current_balance_usd = current_wallet_balance * conversion_rate  
 
-    # Convert wallet balance to USD
-    current_balance_usd = current_wallet_balance * conversion_rate  
+        # 1️⃣ Large Withdrawal Score (Scaled)
+        large_withdrawal_score = (
+            min(withdrawal_amount / (LARGE_WITHDRAWAL_THRESHOLD * current_balance_usd), 1.0) 
+            if current_balance_usd > 0 else 0.0
+        )
 
-    # ---------------- 1. Large Withdrawal Score (Scaled) ----------------
-    # Scale: 0 (0% of balance) → 0.5 (25% of balance) → 1 (50%+ of balance)
-    large_withdrawal_score = (
-        min(withdrawal_amount / (0.5 * current_balance_usd), 1.0) if current_balance_usd > 0 else 0.0
-    )
+        # 2️⃣ Withdrawals Limit Score (Binary)
+        withdrawals_limit_score = int(withdrawals_24h >= MAX_DAILY_WITHDRAWALS)
 
-    # ---------------- 2. Withdrawals Limit Score (Binary) ----------------
-    # Score = 1 if 15+ withdrawals in last 24 hours, otherwise 0
-    withdrawals_limit_score = int(withdrawals_24h >= 15)
+        # 3️⃣ Money Laundering Score (Scaled)
+        money_laundering_score = min(avg_withdrawal_frequency_14d / MAX_LAUNDERING_THRESHOLD, 1.0)
 
-    # ---------------- 3. Money Laundering Score (Scaled) ----------------
-    # Scale: 0 (0 withdrawals/day) → 0.5 (3 withdrawals/day) → 1 (6+ withdrawals/day)
-    money_laundering_score = min(avg_withdrawal_frequency_14d / 6.0, 1.0)
+        # 4️⃣ Failed Withdrawals Score (Scaled)
+        failed_withdrawals_score = min(failed_withdrawals_24h / MAX_FAILED_WITHDRAWALS, 1.0)
 
-    # ---------------- 4. Failed Withdrawals Score (Scaled) ----------------
-    # Scale: 0 (0 failures) → 0.5 (5 failures) → 1 (10+ failures)
-    failed_withdrawals_score = min(failed_withdrawals_24h / 10.0, 1.0)
-
-    # ---------------- Store Results ----------------
-    results["withdrawal_anomalies"] = {
-        "large_withdrawal_score": round(large_withdrawal_score, 2),
-        "withdrawals_limit_score": withdrawals_limit_score,
-        "money_laundering_score": round(money_laundering_score, 2),
-        "failed_withdrawals_score": round(failed_withdrawals_score, 2)
-    }
+        # Store Results
+        results["withdrawal_anomalies"] = {
+            "large_withdrawal_score": round(large_withdrawal_score, 2),
+            "withdrawals_limit_score": withdrawals_limit_score,
+            "money_laundering_score": round(money_laundering_score, 2),
+            "failed_withdrawals_score": round(failed_withdrawals_score, 2)
+        }
+    
+    except Exception as e:
+        logging.error(f"Error in detect_withdrawal_anomalies: {str(e)}", exc_info=True)
+        results["withdrawal_anomalies"] = {"error": str(e)}

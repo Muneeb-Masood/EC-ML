@@ -22,7 +22,9 @@
       "session": {  
         "userId": "user789",  
         "deviceId": "device909",  
-        "timestamp": "2025-03-09T09:00:00Z"  
+        "timestamp": "2025-03-09T09:00:00Z",
+        "latitude": "12.62",
+        "longitude": "122.3"  
       },  
       "device_history_last_3_days": [  
         { "userId": "user126", "timestamp": "2025-03-09T08:00:00Z" },  
@@ -31,7 +33,9 @@
       ],  
       "last_user_login": {  
         "userId": "user789",  
-        "timestamp": "2025-03-09T08:30:00Z"  
+        "timestamp": "2025-03-09T08:30:00Z",
+        "latitude": "12.62",
+        "longitude": "122.3"   
       }  
     },  
   
