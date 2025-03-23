@@ -14,7 +14,7 @@ with open(CONFIG_PATH, "r") as f:
 LARGE_WITHDRAWAL_THRESHOLD = config.get("LARGE_WITHDRAWAL_THRESHOLD", 0.5)
 MAX_DAILY_WITHDRAWALS = config.get("MAX_DAILY_WITHDRAWALS", 15)
 MAX_LAUNDERING_THRESHOLD = config.get("MAX_LAUNDERING_THRESHOLD", 6.0)
-MAX_FAILED_WITHDRAWALS = config.get("MAX_FAILED_WITHDRAWALS", 10)
+MAX_DAILY_FAILED_WITHDRAWALS = config.get("MAX_DAILY_FAILED_WITHDRAWALS", 10)
 
 
 def detect_withdrawal_anomalies(data, results):
@@ -45,30 +45,30 @@ def detect_withdrawal_anomalies(data, results):
             results["withdrawal_anomalies"] = {"error": "Negative values detected in withdrawal_data"}
             return
 
-        # Convert balance to USD
-        current_balance_usd = current_wallet_balance * conversion_rate  
+        # Convert balance from ether to the withdrawal currency
+        current_balance_converted = current_wallet_balance * conversion_rate  
 
         # 1️⃣ Large Withdrawal Score (Scaled)
         large_withdrawal_score = (
-            min(withdrawal_amount / (LARGE_WITHDRAWAL_THRESHOLD * current_balance_usd), 1.0) 
-            if current_balance_usd > 0 else 0.0
+            min(withdrawal_amount / (LARGE_WITHDRAWAL_THRESHOLD * current_balance_converted), 1.0) 
+            if current_balance_converted > 0 else 0.0
         )
 
         # 2️⃣ Withdrawals Limit Score (Binary)
-        withdrawals_limit_score = int(withdrawals_24h >= MAX_DAILY_WITHDRAWALS)
+        withdrawals_limit_flag = int(withdrawals_24h >= MAX_DAILY_WITHDRAWALS)
 
         # 3️⃣ Money Laundering Score (Scaled)
         money_laundering_score = min(avg_withdrawal_frequency_14d / MAX_LAUNDERING_THRESHOLD, 1.0)
 
-        # 4️⃣ Failed Withdrawals Score (Scaled)
-        failed_withdrawals_score = min(failed_withdrawals_24h / MAX_FAILED_WITHDRAWALS, 1.0)
+        # 4️⃣ Failed Withdrawals Score (Binary)
+        failed_withdrawals_limit_flag = int(failed_withdrawals_24h >= MAX_DAILY_FAILED_WITHDRAWALS)
 
         # Store Results
         results["withdrawal_anomalies"] = {
             "large_withdrawal_score": round(large_withdrawal_score, 2),
-            "withdrawals_limit_score": withdrawals_limit_score,
             "money_laundering_score": round(money_laundering_score, 2),
-            "failed_withdrawals_score": round(failed_withdrawals_score, 2)
+            "withdrawals_limit_flag": withdrawals_limit_flag,
+            "failed_withdrawals_limit_flag": failed_withdrawals_limit_flag
         }
     
     except Exception as e:

@@ -1,51 +1,68 @@
 {
-    "transaction_id": "abc123",
-    "user_id": "user789",
-    "transaction_type": "withdrawal",  
-  
-    "transaction_data": {  
-      "Avg min between sent tnx": 14280.6,  
-      "Avg min between received tnx": 1479.86,  
-      "Time Diff between first and last (Mins)": 45357.57,  
-      "Unique Received From Addresses": 21,  
-      "min value received": 0.035,  
-      "max value received": 0.2,  
-      "avg val received": 0.099285714,  
-      "min val sent": 2.084657787,  
-      "avg val sent": 2.084657787,  
-      "total transactions (including tnx to create contract)": 22,  
-      "total ether received": 2.085,  
-      "total ether balance": 0.000342213  
+  "transaction_id": "abc123",
+  "user_id": "user789",
+  "transaction_type": "withdrawal",  
+
+  "transaction_data": {  
+    "Avg min between sent tnx": 0,  
+    "Avg min between received tnx": 0,  
+    "Time Diff between first and last (Mins)": 0,  
+    "Unique Received From Addresses": 0,  
+    "min value received": 0,  
+    "max value received": 0,  
+    "avg val received": 0,  
+    "min val sent": 0,  
+    "avg val sent": 0,  
+    "total transactions (including tnx to create contract)": 0,  
+    "total ether received": 0,  
+    "total ether balance": 0  
+  },  
+
+  "login_data": {  
+    "session": {  
+      "userId": "user789",  
+      "deviceId": "device909",  
+      "timestamp": "2025-03-09T09:00:00Z",
+      "latitude": "12.32",
+      "longitude": "120.3"  
     },  
-  
-    "login_data": {  
-      "session": {  
-        "userId": "user789",  
-        "deviceId": "device909",  
-        "timestamp": "2025-03-09T09:00:00Z",
-        "latitude": "12.62",
-        "longitude": "122.3"  
-      },  
-      "device_history_last_3_days": [  
-        { "userId": "user126", "timestamp": "2025-03-09T08:00:00Z" },  
-        { "userId": "user626", "timestamp": "2025-03-08T08:00:00Z" },  
-        { "userId": "user66", "timestamp": "2025-03-08T07:00:00Z" }  
-      ],  
-      "last_user_login": {  
-        "userId": "user789",  
-        "timestamp": "2025-03-09T08:30:00Z",
-        "latitude": "12.62",
-        "longitude": "122.3"   
-      }  
-    },  
-  
-    "withdrawal_data": {  
-      "current_wallet_balance": "1",  
-      "withdrawal_amount": "1000",  
-      "conversion_rate": "2000",  
-      "avg_withdrawal_frequency_14d": "0.428",  
-      "withdrawals_24h": "3",  
-      "failed_withdrawals_24h": "1"  
+    "device_history_last_3_days": [  
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user34126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "usersd126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user1dcsds26", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "use66r126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" }, 
+      { "userId": "user126", "deviceId": "device909", "timestamp": "2025-03-09T08:00:00Z" } 
+    ],  
+    "last_user_login": {  
+      "userId": "user789",  
+      "timestamp": "2025-03-09T08:30:00Z",
+      "latitude": "12.32",
+      "longitude": "122.3"   
     }  
+  },  
+
+  "withdrawal_data": {  
+    "current_wallet_balance": "1",  
+    "withdrawal_amount": "1000",  
+    "conversion_rate": "2000",  
+    "avg_withdrawal_frequency_14d": "0.428",  
+    "withdrawals_24h": "3",  
+    "failed_withdrawals_24h": "1"  
   }
-  
+
+}

@@ -46,11 +46,11 @@ def detect_login_anomalies(data, results):
 
         # ---------------- 1. Excessive Logins from the Same Device (Last 3 Days) ----------------
         logins_from_device = sum(1 for entry in device_history if entry.get("deviceId") == device_id)
-        excessive_logins_score = min(logins_from_device / CONFIG["max_logins_for_excessive_score"], 1.0)
+        excessive_logins_score = min(logins_from_device / CONFIG["max_logins_for_full_score"], 1.0)
 
         # ---------------- 2. Excessive Unique Account Logins from Same Device (Last 3 Days) ----------------
         unique_accounts_on_device = len(set(entry.get("userId") for entry in device_history if entry.get("deviceId") == device_id))
-        excessive_unique_accounts_score = min(unique_accounts_on_device / CONFIG["max_unique_accounts_for_excessive_score"], 1.0)
+        excessive_unique_accounts_score = min(unique_accounts_on_device / CONFIG["max_unique_accounts_for_full_score"], 1.0)
 
         # ---------------- 3. Unlikely Travel Detection (Based on Travel Speed) ----------------
         last_latitude = float(last_user_login.get("latitude", 0))
