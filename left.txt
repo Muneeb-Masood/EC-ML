@@ -1,0 +1,25 @@
+Funding Wallet, Assets Overview, Spot Asset Log, and Funding Asset Log: Details of
+the user's wallet and transactions.
+
+Binance Pay, P2P, Order History, OTC Trading: Details of various trading and
+payment activities.
+
+Gift Card Creation/Transfer: Logs of gift card activities, which can be used to obscure
+the flow of funds.
+
+Frequent Operations:
+o C2C Place Order With Commission Fee: 101 occurrences.
+o C2C Sellers Release Orders: 44 occurrences.
+o Other notable actions:
+ Submitting payments (21 occurrences).
+ Payment checkouts (17 occurrences).
+
+
+User Activity Monitoring:
+o Analyze C2C orders and payments for abnormal activity, such as repeated order
+placements or releases outside typical behavior.
+o Use behavioral biometrics (e.g., typing speed, device patterns) to validate user
+authenticity.
+
+
+
