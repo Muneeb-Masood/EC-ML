@@ -13,7 +13,6 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 @app.route('/detect_fraud', methods=['POST'])
 def detect_fraud():
     try:
-        # Ensure request header contains Content-Type: application/json
         if request.content_type != "application/json":
             reason = "Missing or incorrect 'Content-Type' header. Expected 'application/json'."
             logging.warning(reason)
