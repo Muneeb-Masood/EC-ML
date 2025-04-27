@@ -1,0 +1,33 @@
+{
+    "geospatial_clustering": {
+        "_comment": "Configuration for geospatial clustering",
+
+        "algorithm_parameters": {
+            "_comment": "Algorithm parameters for DBSCAN clustering",
+            "eps_km": 1.5,
+            "_comment_eps_km": "Cluster radius in kilometers",
+            "min_samples": 5,
+            "_comment_min_samples": "Minimum points to form a cluster",
+            "buffer_percentage": 0.1,
+            "_comment_buffer_percentage": "10% radius buffer for cluster inclusion"
+        },
+
+        "output_settings": {
+            "_comment": "Output formatting rules",
+            "coordinate_precision": 6,
+            "_comment_coordinate_precision": "Decimal places for coordinates (~0.1m precision)",
+            "radius_precision": 3,
+            "_comment_radius_precision": "Decimal places for cluster radius",
+            "density_precision": 2,
+            "_comment_density_precision": "Decimal places for density values"
+        },
+
+        "validation": {
+            "_comment": "Fraud detection thresholds",
+            "absolute_density_threshold": 100.0,
+            "_comment_absolute_density_threshold": "Flag clusters over this density",
+            "relative_density_multiplier": 5.0,
+            "_comment_relative_density_multiplier": "Flag clusters N× denser than average"
+        }
+    }
+}

@@ -5,7 +5,7 @@
 
   "transaction_data": {  
     "Avg min between sent tnx": 0,  
-    "Avg min between received tnx": 0,  
+    "Avg min between received tnx": 0, 
     "Time Diff between first and last (Mins)": 0,  
     "Unique Received From Addresses": 0,  
     "min value received": 0,  
@@ -57,12 +57,75 @@
   },  
 
   "withdrawal_data": {  
-    "current_wallet_balance": "1",  
+    "current_wallet_balance": "2",  
     "withdrawal_amount": "1000",  
     "conversion_rate": "2000",  
     "avg_withdrawal_frequency_14d": "0.428",  
     "withdrawals_24h": "3",  
-    "failed_withdrawals_24h": "1"  
-  }
+    "failed_withdrawals_24h": "0"  
+  },
+
+
+  "geospacial_transaction_data_2d": [
+    {"latitude": "12.31", "longitude": "120.29"},
+    {"latitude": "12.315", "longitude": "120.295"},
+    {"latitude": "12.325", "longitude": "120.305"},
+    {"latitude": "12.33", "longitude": "120.31"},
+    {"latitude": "12.318", "longitude": "120.295"},
+    {"latitude": "12.322", "longitude": "120.298"},
+    {"latitude": "12.319", "longitude": "120.302"},
+    {"latitude": "12.327", "longitude": "120.307"},
+    {"latitude": "12.314", "longitude": "120.296"},
+    {"latitude": "12.326", "longitude": "120.304"},
+
+    {"latitude": "12.35", "longitude": "120.5"},
+    {"latitude": "12.355", "longitude": "120.505"},
+    {"latitude": "12.345", "longitude": "120.495"},
+    {"latitude": "12.352", "longitude": "120.503"},
+    {"latitude": "12.348", "longitude": "120.498"},
+    {"latitude": "12.357", "longitude": "120.508"},
+    {"latitude": "12.349", "longitude": "120.501"},
+    {"latitude": "12.353", "longitude": "120.497"},
+    {"latitude": "12.346", "longitude": "120.502"},
+    {"latitude": "12.351", "longitude": "120.504"},
+
+    {"latitude": "13.0", "longitude": "121.0"},
+    {"latitude": "13.015", "longitude": "121.02"},
+    {"latitude": "12.995", "longitude": "120.98"},
+    {"latitude": "13.005", "longitude": "121.015"},
+    {"latitude": "12.985", "longitude": "120.99"},
+    {"latitude": "13.01", "longitude": "121.03"},
+    {"latitude": "12.992", "longitude": "120.97"},
+    {"latitude": "13.008", "longitude": "121.025"},
+
+    {"latitude": "14.123", "longitude": "119.876"},
+    {"latitude": "11.456", "longitude": "121.234"},
+    {"latitude": "12.789", "longitude": "122.345"},
+    {"latitude": "13.456", "longitude": "119.567"},
+    {"latitude": "12.111", "longitude": "118.999"},
+    
+    {"latitude": "12.567", "longitude": "120.678"},
+    {"latitude": "12.569", "longitude": "120.681"},
+    {"latitude": "12.565", "longitude": "120.675"},
+    {"latitude": "12.572", "longitude": "120.684"},
+    {"latitude": "12.563", "longitude": "120.672"},
+    {"latitude": "12.571", "longitude": "120.679"},
+    {"latitude": "12.568", "longitude": "120.677"},
+    {"latitude": "12.566", "longitude": "120.682"},
+    {"latitude": "12.573", "longitude": "120.686"},
+    {"latitude": "12.564", "longitude": "120.674"},
+
+    {"latitude": "12.4001", "longitude": "120.4001"},
+    {"latitude": "12.4002", "longitude": "120.4002"},
+    {"latitude": "12.4000", "longitude": "120.4000"},
+    {"latitude": "12.4003", "longitude": "120.4003"},
+    {"latitude": "12.4001", "longitude": "120.4001"},
+    
+    {"latitude": "12.200", "longitude": "120.200"},
+    {"latitude": "12.201", "longitude": "120.201"},
+    {"latitude": "12.199", "longitude": "120.199"},
+    {"latitude": "12.2005", "longitude": "120.2005"},
+    {"latitude": "12.198", "longitude": "120.198"}
+  ]
 
 }
