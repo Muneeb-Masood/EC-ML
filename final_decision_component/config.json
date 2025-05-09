@@ -1,0 +1,14 @@
+{"decision_parameters": {
+    "score_thresholds": {
+        "ml_fraud": 0.9,
+        "unlikely_travel": 0.5,
+        "excessive_logins": 0.5,
+        "excessive_unique_logins": 0.5,
+        "large_withdrawal": 0.5,
+        "money_laundering": 0.5
+    },
+    "cluster_impact": {
+        "consider_suspicious_clusters": true,
+        "max_reasons": 5
+    }
+}}
