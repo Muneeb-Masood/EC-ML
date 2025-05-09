@@ -55,7 +55,7 @@ class GeospatialClusterAnalyzer:
                 geodesic(centroid, point).km 
                 for point in cluster_points
             )
-            
+
             area = np.pi * (max_distance ** 2)
             density = len(cluster_points) / (area or 0.1)
 
